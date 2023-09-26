@@ -11,7 +11,7 @@ export default function Input({ inputProps, ...props }) {
       if (meta.touched && meta.error) {
         setInputClasses("border-2 border-red");
       } else {
-        setInputClasses("border");
+        setInputClasses("border border-grayish-blue");
       }
     });
   }
