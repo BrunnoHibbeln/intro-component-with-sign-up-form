@@ -15,8 +15,8 @@ export default {
       },
       fontSize: { body: "1rem" },
       backgroundImage: {
-        mobile: ["url(./src/images/bg-intro-mobile.png)"],
-        desktop: ["url(./src/images/bg-intro-desktop.png)"],
+        mobile: ["url(/bg-intro-mobile.png)"],
+        desktop: ["url(/bg-intro-desktop.png)"],
       },
     },
   },

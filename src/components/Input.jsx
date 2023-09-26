@@ -1,5 +1,5 @@
 import { useField } from "formik";
-import IconError from "../images/icon-error.svg";
+import IconError from "../assets/icon-error.svg";
 import { useEffect, useState } from "react";
 
 export default function Input({ inputProps, ...props }) {
