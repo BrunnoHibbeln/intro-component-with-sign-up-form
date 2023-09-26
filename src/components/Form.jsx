@@ -46,7 +46,7 @@ export default function Form() {
           setSubmitting(false);
         }}
       >
-        <FormikForm className="relative flex flex-col items-center justify-start gap-4 rounded-lg bg-white px-5 py-7 lg:px-8 lg:py-9">
+        <FormikForm className="relative flex flex-col items-center justify-start gap-4 rounded-lg bg-white px-5 py-7 duration-500 lg:px-8 lg:py-9">
           <Input name="firstName" type="text" placeholder="First Name" />
           <Input name="lastName" type="text" placeholder="Last Name" />
           <Input name="email" type="email" placeholder="Email Address" />

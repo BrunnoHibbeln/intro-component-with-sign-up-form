@@ -19,7 +19,7 @@ export default function Input({ inputProps, ...props }) {
   return (
     <section className="relative w-full">
       <input
-        className={`w-full rounded-md ${inputClasses} p-5 font-semibold focus:border-none lg:px-8 lg:py-3`}
+        className={`w-full rounded-md ${inputClasses} p-5 font-semibold focus:border-2 lg:px-8 lg:py-3`}
         {...field}
         {...props}
       ></input>
