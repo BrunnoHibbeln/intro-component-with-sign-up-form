@@ -1,16 +1,30 @@
 import { useField } from "formik";
 import IconError from "../assets/icon-error.svg";
+import { useEffect, useState } from "react";
 
-export default function Input({ inputProps, placeholder, ...props }) {
+export default function Input({ inputProps, ...props }) {
   const [field, meta] = useField(props);
+  const [inputClasses, setInputClasses] = useState("border");
+
+  function handleInputError() {
+    useEffect(() => {
+      if (meta.touched && meta.error) {
+        setInputClasses("border-2 border-red");
+      } else {
+        setInputClasses("border");
+      }
+    });
+  }
 
   return (
     <section className="relative w-full">
       <input
-        className={`w-full rounded-md ${inputProps} p-5 font-semibold lg:px-8 lg:py-3`}
+        className={`w-full rounded-md ${inputClasses} p-5 font-semibold focus:border-none lg:px-8 lg:py-3`}
         {...field}
         {...props}
       ></input>
+
+      {handleInputError()}
 
       {meta.touched && meta.error ? (
         <>

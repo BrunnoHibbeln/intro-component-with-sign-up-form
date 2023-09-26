@@ -1,18 +1,11 @@
 import * as Yup from "yup";
-import { Formik, Form as FormikForm, useField } from "formik";
+import { Formik, Form as FormikForm } from "formik";
 import Input from "./Input";
-import { useState } from "react";
 
 export default function Form() {
-  const [field, meta] = useField();
-  const [inputProps, setInputProps] = useState("border");
-
-  const handleInputError = () => {
-    if (meta.touched && meta.error) {
-      setInputProps("border-2 border-red");
-    } else null;
+  const getCharacterValidationError = (str) => {
+    return `Your password must have at least 1 ${str} character`;
   };
-
   return (
     <section className="flex flex-col gap-6 lg:w-2/5">
       <section className="rounded-lg bg-blue px-14 py-4 text-center text-white shadow-2xl">
@@ -29,12 +22,24 @@ export default function Form() {
           password: "",
         }}
         validationSchema={Yup.object({
-          firstName: Yup.string().required("First Name cannot be empty"),
-          lastName: Yup.string().required("Last Name cannot be empty"),
+          firstName: Yup.string()
+            .min(5, "Too Short!")
+            .max(15, "Too Long!")
+            .required("First Name cannot be empty"),
+          lastName: Yup.string()
+            .min(5, "Too Short!")
+            .max(15, "Too Long!")
+            .required("Last Name cannot be empty"),
           email: Yup.string()
             .email("Looks like this is not an email")
             .required("Email cannot be empty"),
-          password: Yup.string().required("Password cannot be empty"),
+          password: Yup.string()
+            .min(5, "Too Short!")
+            .max(30, "Too Long!")
+            .matches(/[A-Z]/, getCharacterValidationError("uppercase"))
+            .matches(/[a-z]/, getCharacterValidationError("lowercase"))
+            .matches(/[0-9]/, getCharacterValidationError("digit"))
+            .required("Password cannot be empty"),
         })}
         onSubmit={async (values, { setSubmitting }) => {
           await new Promise((r) => setTimeout(r, 500));
@@ -42,12 +47,7 @@ export default function Form() {
         }}
       >
         <FormikForm className="relative flex flex-col items-center justify-start gap-4 rounded-lg bg-white px-5 py-7 lg:px-8 lg:py-9">
-          <Input
-            inputProps={inputProps}
-            name="firstName"
-            type="text"
-            placeholder="First Name"
-          />
+          <Input name="firstName" type="text" placeholder="First Name" />
           <Input name="lastName" type="text" placeholder="Last Name" />
           <Input name="email" type="email" placeholder="Email Address" />
           <Input name="password" type="password" placeholder="Password" />
